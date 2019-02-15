@@ -107,6 +107,3 @@ isValidMove2 b l1@(r1, c1) l2@(r2, c2) s1 s2 = isValidMove3 b l1 l2 (abs (r1 - r
 
 isValidMove :: Board -> (Int, Int) -> (Int, Int) -> Bool
 isValidMove b l1 l2 = isValidMove2 b l1 l2 (b `pieceAt` l1) (b `pieceAt` l2)
-
-
-tf (r1, c1) (r2, c2) = let rd = abs r1 - r2 ; cd = abs c1 - c2 ; in (rd, cd) == (1, 2) || (rd, cd) == (2, 1)
