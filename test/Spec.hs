@@ -55,6 +55,20 @@ main = hspec $
         isValidMove (putAt (2, 2) (Filled White Queen) unfilledBoard) (2, 2) (1, 1) `shouldBe` True
         isValidMove (putAt (2, 2) (Filled White Queen) unfilledBoard) (2, 2) (5, 1) `shouldBe` False
         isValidMove (putAt (2, 2) (Filled White Queen) unfilledBoard) (2, 2) (3, 1) `shouldBe` True
-    
+    it "lets pawn move forward" $ do
+        isValidMove ((putAt (2, 2) (Filled White Pawn) unfilledBoard)) (2, 2) (3, 2) `shouldBe` True
+        isValidMove ((putAt (2, 2) (Filled Black Pawn) unfilledBoard)) (2, 2) (1, 2) `shouldBe` True
+    it "doesn't let pawn capture forward" $ do
+        isValidMove (putAt (3, 2) (Filled Black Pawn) (putAt (2, 2) (Filled White Pawn) unfilledBoard)) (2, 2) (3, 2) `shouldBe` False
+        isValidMove (putAt (1, 2) (Filled White Pawn) (putAt (2, 2) (Filled Black Pawn) unfilledBoard)) (2, 2) (1, 2) `shouldBe` False
+    it "doesn't let pawn move backward" $ do
+        isValidMove ((putAt (2, 2) (Filled White Pawn) unfilledBoard)) (2, 2) (1, 2) `shouldBe` False
+        isValidMove ((putAt (2, 2) (Filled Black Pawn) unfilledBoard)) (2, 2) (3, 2) `shouldBe` False
+    it "lets pawn capture forward diagonal" $ do
+        isValidMove (putAt (3, 3) (Filled Black Pawn) (putAt (2, 2) (Filled White Pawn) unfilledBoard)) (2, 2) (3, 3) `shouldBe` True
+        isValidMove (putAt (1, 3) (Filled White Pawn) (putAt (2, 2) (Filled Black Pawn) unfilledBoard)) (2, 2) (1, 3) `shouldBe` True
+        isValidMove (putAt (3, 3) (Filled White Pawn) (putAt (2, 2) (Filled Black Pawn) unfilledBoard)) (2, 2) (3, 3) `shouldBe` False
+        isValidMove (putAt (1, 3) (Filled Black Pawn) (putAt (2, 2) (Filled White Pawn) unfilledBoard)) (2, 2) (1, 3) `shouldBe` False
+
         
             
